@@ -28,6 +28,9 @@ class Round {
     if (results[0] === opts[0] && results[1] === opts[opts.length - 1]) {
       this.winner = this.players[0];
       this.loser = this.players[1];
+    } else if (results[1] === opts[0] && results[0] === opts[opts.length - 1]) {
+      this.winner = this.players[1];
+      this.loser = this.players[0];
     } else if (opts.indexOf(results[0]) > opts.indexOf(results[1])) {
       this.winner = this.players[0];
       this.loser = this.players[1];

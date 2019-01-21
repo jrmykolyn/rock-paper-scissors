@@ -50,7 +50,7 @@ describe('Round', () => {
         stub.restore();
       });
 
-      it('should set the winner and loser properties when the first player wins', () => {
+      it('should correctly set the winner and loser properties when the first player selects "rock", and the second player selects "scissors"', () => {
         const player1 = new Player();
         const player2 = new Player();
         player1.play = () => 'rock';
@@ -63,11 +63,63 @@ describe('Round', () => {
         expect(round.loser).to.eq(player2);
       });
 
-      it('should set the winner and loser properties when the second player wins', () => {
+      it('should correctly set the winner and loser properties when the first player selects "scissors", and the second player selects "paper"', () => {
+        const player1 = new Player();
+        const player2 = new Player();
+        player1.play = () => 'scissors';
+        player2.play = () => 'paper';
+        const round = new Round(player1, player2);
+
+        round.play();
+
+        expect(round.winner).to.eq(player1);
+        expect(round.loser).to.eq(player2);
+      });
+
+      it('should correctly set the winner and loser properties when the first player selects "paper", and the second player selects "rock"', () => {
+        const player1 = new Player();
+        const player2 = new Player();
+        player1.play = () => 'paper';
+        player2.play = () => 'rock';
+        const round = new Round(player1, player2);
+
+        round.play();
+
+        expect(round.winner).to.eq(player1);
+        expect(round.loser).to.eq(player2);
+      });
+
+      it('should correctly set the winner and loser properties when the first player selects "scissors, and the second player selects "rock"', () => {
+        const player1 = new Player();
+        const player2 = new Player();
+        player1.play = () => 'scissors';
+        player2.play = () => 'rock';
+        const round = new Round(player1, player2);
+
+        round.play();
+
+        expect(round.winner).to.eq(player2);
+        expect(round.loser).to.eq(player1);
+      });
+
+      it('should correctly set the winner and loser properties when the first player selects "paper, and the second player selects "scissors"', () => {
         const player1 = new Player();
         const player2 = new Player();
         player1.play = () => 'paper';
         player2.play = () => 'scissors';
+        const round = new Round(player1, player2);
+
+        round.play();
+
+        expect(round.winner).to.eq(player2);
+        expect(round.loser).to.eq(player1);
+      });
+
+      it('should correctly set the winner and loser properties when the first player selects "rock, and the second player selects "paper"', () => {
+        const player1 = new Player();
+        const player2 = new Player();
+        player1.play = () => 'rock';
+        player2.play = () => 'paper';
         const round = new Round(player1, player2);
 
         round.play();
