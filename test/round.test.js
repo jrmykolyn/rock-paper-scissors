@@ -1,4 +1,5 @@
 const { expect } = require('chai');
+const sinon = require('sinon');
 
 const Player = require('../src/player');
 const Round = require('../src/round');
@@ -21,6 +22,59 @@ describe('Round', () => {
 
     it('should set the isTie property to false', () => {
       expect(new Round().isTie).to.be.false;
+    });
+  });
+
+  describe('API', () => {
+    describe('play()', () => {
+      it('should return undefined if no players are provided', () => {
+        expect(new Round().play()).to.be.undefined;
+      });
+
+      it('should set the isComplete property to true', () => {
+        const round = new Round(new Player(), new Player());
+
+        round.play();
+
+        expect(round.isComplete).to.be.true;
+      });
+
+      it('should set the isTie property to true if both players select the same option', () => {
+        const stub = sinon.stub(Player.prototype, 'play').returns('foo');
+        const round = new Round(new Player(), new Player());
+
+        round.play();
+
+        expect(round.isComplete).to.be.true;
+
+        stub.restore();
+      });
+
+      it('should set the winner and loser properties when the first player wins', () => {
+        const player1 = new Player();
+        const player2 = new Player();
+        player1.play = () => 'rock';
+        player2.play = () => 'scissors';
+        const round = new Round(player1, player2);
+
+        round.play();
+
+        expect(round.winner).to.eq(player1);
+        expect(round.loser).to.eq(player2);
+      });
+
+      it('should set the winner and loser properties when the second player wins', () => {
+        const player1 = new Player();
+        const player2 = new Player();
+        player1.play = () => 'paper';
+        player2.play = () => 'scissors';
+        const round = new Round(player1, player2);
+
+        round.play();
+
+        expect(round.winner).to.eq(player2);
+        expect(round.loser).to.eq(player1);
+      });
     });
   });
 });
