@@ -27,4 +27,32 @@ describe('Game', () => {
       expect(new Game().isTie).to.be.false;
     });
   });
+
+  describe('play()', () => {
+    it('should correctly set the winner and loser properties when the first player wins', () => {
+      const player1 = new Player();
+      const player2 = new Player();
+      player1.play = () => 'rock';
+      player2.play = () => 'scissors';
+      const game = new Game(player1, player2);
+
+      game.play();
+
+      expect(game.winner).to.eq(player1);
+      expect(game.loser).to.eq(player2);
+    });
+
+    it('should correctly set the winner and loser properties when the second player wins', () => {
+      const player1 = new Player();
+      const player2 = new Player();
+      player1.play = () => 'paper';
+      player2.play = () => 'scissors';
+      const game = new Game(player1, player2);
+
+      game.play();
+
+      expect(game.winner).to.eq(player2);
+      expect(game.loser).to.eq(player1);
+    });
+  });
 });
