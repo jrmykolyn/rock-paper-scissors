@@ -20,7 +20,7 @@ class Game {
         const { player1: player1Wins, player2: player2Wins } = this.rounds.reduce((acc, { winner }) => {
           if (winner === this.players[0]) {
             acc.player1 = (acc.player1 + 1 || 1);
-          } else {
+          } else if (winner === this.players[1])  {
             acc.player2 = (acc.player2 + 1 || 1);
           }
 
