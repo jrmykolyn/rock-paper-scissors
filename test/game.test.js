@@ -40,6 +40,7 @@ describe('Game', () => {
 
       expect(game.winner).to.eq(player1);
       expect(game.loser).to.eq(player2);
+      expect(game.rounds.length).to.eq(3);
     });
 
     it('should correctly set the winner and loser properties when the second player wins', () => {
@@ -53,6 +54,7 @@ describe('Game', () => {
 
       expect(game.winner).to.eq(player2);
       expect(game.loser).to.eq(player1);
+      expect(game.rounds.length).to.eq(3);
     });
   });
 });
