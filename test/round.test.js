@@ -1,8 +1,7 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
 
-const Player = require('../src/player');
-const Round = require('../src/round');
+const { Player, Round } = require('../src/models');
 
 describe('Round', () => {
   describe('constructor()', () => {

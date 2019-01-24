@@ -1,6 +1,6 @@
 const { expect } = require('chai');
 
-const Player = require('../src/player');
+const { Player } = require('../src/models');
 
 describe('Player', () => {
   describe('API', () => {
