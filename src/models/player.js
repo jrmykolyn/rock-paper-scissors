@@ -8,6 +8,10 @@ class Player {
     const vals = ['rock', 'paper', 'scissors'];
     return vals[Math.floor(Math.random() * vals.length)];
   }
+
+  getName() {
+    return `${this.firstName} ${this.lastName}`;
+  }
 }
 
 module.exports = Player;

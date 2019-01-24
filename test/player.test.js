@@ -25,5 +25,15 @@ describe('Player', () => {
         expect(results.every((result) => ['rock', 'paper', 'scissors'].includes(result))).to.be.true;
       });
     });
+
+    describe('getName()', () => {
+      it('should extract, concatenate, and return the first and last names', () => {
+        const player = new Player();
+        player.firstName = 'Foo';
+        player.lastName = 'Bar';
+
+        expect(player.getName()).to.eq('Foo Bar');
+      });
+    });
   });
 });
